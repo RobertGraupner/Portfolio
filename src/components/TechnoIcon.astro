@@ -1,0 +1,48 @@
+---
+interface Props {
+  name: string;
+  logo: string;
+  color?: string;
+  size?: string;
+}
+
+const { name, logo, color = "currentColor", size = "2em" } = Astro.props;
+
+// Pobierz zawartość SVG
+const response = await fetch(new URL(logo, Astro.url));
+let svgContent = await response.text();
+
+// Zamień wszystkie możliwe atrybuty koloru
+svgContent = svgContent
+  .replace(/fill="[^"]*"/g, `fill="${color}"`)
+  .replace(/stroke="[^"]*"/g, `stroke="${color}"`)
+  // Dodaj style bezpośrednio do SVG
+  .replace("<svg", `<svg style="color: ${color};"`)
+  // Usuń stałe kolory z path
+  .replace(/fill="#[^"]*"/g, `fill="${color}"`)
+  .replace(/stroke="#[^"]*"/g, `stroke="${color}"`)
+  // Zamień currentColor na wybrany kolor
+  .replace(/fill="currentColor"/g, `fill="${color}"`)
+  .replace(/stroke="currentColor"/g, `stroke="${color}"`);
+---
+
+<div class="tech-icon" style={`--icon-size: ${size}`} set:html={svgContent} />
+
+<style>
+  .tech-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tech-icon :global(svg) {
+    width: var(--icon-size, 2em);
+    height: var(--icon-size, 2em);
+  }
+
+  /* Upewnij się, że wszystkie elementy wewnątrz SVG dziedziczą kolor */
+  .tech-icon :global(svg *) {
+    fill: inherit;
+    stroke: inherit;
+  }
+</style>

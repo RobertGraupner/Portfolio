@@ -1,5 +1,7 @@
 ---
 import { getCollection } from "astro:content";
+import { iconPaths } from "../components/IconPaths";
+import { technologies } from "../constants/technologies";
 
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -30,14 +32,14 @@ const projects = (await getCollection("work"))
     <div class="wrapper stack gap-8 lg:gap-20">
       <header class="hero">
         <Hero
-          title="Hello, my name is Jeanine White"
-          tagline="I am a Creative Developer who is currently based in Portland, Oregon."
+          title="Hello, my name is Robert Gräupner"
+          tagline="Frontend developer creating web applications with a focus on performance and user experience. I combine experience in programming, sales and engineering, which gives me a unique perspective on product development."
           align="start"
         >
           <div class="roles">
             <Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
-            <Pill><Icon icon="microphone-stage" size="1.33em" /> Speaker</Pill>
-            <Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill>
+            <Pill><Icon icon="ai" size="1.33em" /> AI enthusiast</Pill>
+            <Pill><Icon icon="photo" size="1.33em" /> Photographer</Pill>
           </div>
         </Hero>
 
@@ -57,8 +59,8 @@ const projects = (await getCollection("work"))
         <header class="section-header stack gap-2 lg:gap-4">
           <h3>Selected Work</h3>
           <p>
-            Take a look below at some of my featured work for clients from the
-            past few years.
+            Take a look for some of my projects to get an idea of my skills and
+            experience.
           </p>
         </header>
 
@@ -84,25 +86,26 @@ const projects = (await getCollection("work"))
 
       <section class="section with-background bg-variant">
         <header class="section-header stack gap-2 lg:gap-4">
-          <h3>Mentions</h3>
+          <h3>Technologies</h3>
           <p>
-            I have been fortunate enough to receive praise for my work in
-            several publications. Take a look below to learn more.
+            I work with a wide range of modern technologies. Take a look below
+            to learn more.
           </p>
         </header>
 
         <div class="gallery">
           <Grid variant="small">
             {
-              [
-                "Medium",
-                "BuzzFeed",
-                "The Next Web",
-                "awwwards.",
-                "TechCrunch",
-              ].map((brand) => (
+              technologies.map((tech) => (
                 <li class="mention-card">
-                  <p>{brand}</p>
+                  <Icon
+                    icon={tech.logo as keyof typeof iconPaths}
+                    size="2.5em"
+                    color={tech.color}
+                    strokeWidth="0.5"
+                  />
+
+                  <p>{tech.name}</p>
                 </li>
               ))
             }
@@ -138,7 +141,7 @@ const projects = (await getCollection("work"))
   @media (min-width: 50em) {
     .hero {
       display: grid;
-      grid-template-columns: 6fr 4fr;
+      grid-template-columns: 1fr 1fr;
       padding-inline: 2.5rem;
       gap: 3.75rem;
     }
@@ -147,12 +150,16 @@ const projects = (await getCollection("work"))
       margin-top: 0.5rem;
       display: flex;
       gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
     .hero img {
       aspect-ratio: 3 / 4;
       border-radius: 4.5rem;
       object-fit: cover;
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
     }
   }
 
@@ -182,7 +189,7 @@ const projects = (await getCollection("work"))
       url("/assets/backgrounds/noise.png") top center/220px repeat,
       var(--hero-bg) center center / var(--bg-gradient-size) no-repeat,
       var(--gray-999);
-    background-blend-mode: overlay, normal, normal, normal;
+    background-blend-mode: overlay, normal, normal;
     mix-blend-mode: var(--bg-blend-mode);
     z-index: -1;
   }
@@ -241,10 +248,12 @@ const projects = (await getCollection("work"))
 
   .mention-card {
     display: flex;
+    flex-direction: column;
     height: 7rem;
     justify-content: center;
     align-items: center;
     text-align: center;
+    gap: 0.5rem;
     border: 1px solid var(--gray-800);
     border-radius: 1.5rem;
     color: var(--gray-300);
@@ -252,10 +261,20 @@ const projects = (await getCollection("work"))
     box-shadow: var(--shadow-sm);
   }
 
+  .tech-logo {
+    width: 2rem;
+    height: 2rem;
+    object-fit: contain;
+  }
+
   @media (min-width: 50em) {
     .mention-card {
-      border-radius: 1.5rem;
       height: 9.5rem;
+    }
+
+    .tech-logo {
+      width: 3rem;
+      height: 3rem;
     }
   }
 </style>
