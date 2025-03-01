@@ -1,17 +1,21 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ContactCTA from "../../components/ContactCTA.astro";
+import Hero from "../../components/Hero.astro";
 
-import ContactCTA from "../components/ContactCTA.astro";
-import Hero from "../components/Hero.astro";
+// Get language and translation function
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<BaseLayout title="About | Robert Gräupner" description="About Robert Gräupner">
+<BaseLayout
+  title="O mnie | Robert Gräupner"
+  description="Dowiedz się więcej o Robercie Gräupnerze"
+>
   <div class="stack gap-20">
     <main class="wrapper about">
-      <Hero
-        title="About"
-        tagline="Thanks for stopping by. Read below to learn more about myself and my background."
-      >
+      <Hero title={t("about.title")} tagline={t("about.tagline")}>
         <img
           width="240"
           height="360"
@@ -21,34 +25,37 @@ import Hero from "../components/Hero.astro";
       </Hero>
 
       <section>
-        <h2 class="section-title">Background</h2>
+        <h2 class="section-title">Doświadczenie zawodowe</h2>
         <div class="content work-experience">
           <p>
-            I am an experienced Front-end Developer specializing in creating
-            modern, efficient, and responsive web applications. I possess
-            several years of experience working with advanced JavaScript
-            technologies and modern frontend frameworks.
+            Jestem doświadczonym Front-end Developerem specjalizującym się w
+            tworzeniu nowoczesnych, wydajnych i responsywnych aplikacji
+            internetowych. Posiadam kilkuletnie doświadczenie w pracy z
+            zaawansowanymi technologiami JavaScript oraz nowoczesnymi
+            frameworkami frontendowymi.
           </p>
           <p>
-            I am passionate about modern web technologies, creating internet
-            applications with emphasis on performance and user experience. My
-            unique combination of experience in programming, sales, and
-            engineering provides me with a multidimensional perspective on the
-            digital product development process, which translates into creating
-            solutions that not only meet technical requirements but also address
-            real business needs and end-user expectations.
+            Jestem pasjoantem nowoczesnych technologii webowych, tworzący
+            aplikacje internetowe z naciskiem na wydajność i user experience.
+            Moje unikalne połączenie doświadczenia w programowaniu, sprzedaży
+            oraz inżynierii zapewnia mi wielowymiarową perspektywę na proces
+            rozwoju produktów cyfrowych, co przekłada się na tworzenie
+            rozwiązań, które nie tylko spełniają techniczne wymagania, ale
+            również odpowiadają na rzeczywiste potrzeby biznesowe i oczekiwania
+            użytkowników końcowych
           </p>
           <p>
-            In my daily work, I focus on implementing efficient solutions that
-            harmoniously combine aesthetic design with advanced functionality. I
-            strive to create code that not only fulfills its basic role but is
-            also easy to maintain and expand, which translates into long-term
-            value for the projects in which I participate.
+            W swojej codziennej pracy koncentruję się na implementacji wydajnych
+            rozwiązań, które harmonijnie łączą estetyczny design z zaawansowaną
+            funkcjonalnością. Dążę do tworzenia kodu, który nie tylko spełnia
+            swoją podstawoą rolę, ale jest również łatwy w utrzymaniu i
+            rozbudowie, co przekłada się na długoterminową wartość dla
+            projektów, w których uczestniczę.
           </p>
         </div>
       </section>
       <section>
-        <h2 class="section-title">Skills</h2>
+        <h2 class="section-title">Umiejętności</h2>
         <div class="content">
           <ul>
             <li>JavaScript</li>
@@ -67,34 +74,33 @@ import Hero from "../components/Hero.astro";
         </div>
       </section>
       <section>
-        <h2 class="section-title">Education</h2>
+        <h2 class="section-title">Edukacja</h2>
         <div class="content">
           <p>
-            I graduated from Silesian University of Technology with a degree in
-            Civil Engineering.<br />
-            I have a master's degree in civil engineering.
+            Ukończyłem Politechnikę Śląską na kierunku Budownictwo.<br />
+            Posiadam tytuł magistra inżyniera budownictwa.
           </p>
         </div>
       </section>
       <section>
-        <h2 class="section-title">Courses</h2>
+        <h2 class="section-title">Kursy</h2>
         <div class="content">
           <ul>
             <li>
               <a
                 href="https://kursai.coderslab.pl/course/darmowy-kurs-microsoft-ai-dla-programistow"
-                >Microsoft AI for developers</a
+                >Microsoft AI dla programistów</a
               >
             </li>
             <li>
-              <a href="https://opanuj.ai">Cursor: develop with AI</a>
+              <a href="https://opanuj.ai">Cursor: programuj z AI</a>
             </li>
             <li>
-              <a href="https://opanujfrontend.pl">Master frontend: AI edition</a
+              <a href="https://opanujfrontend.pl">Opanuj frontend: AI edition</a
               >
             </li>
             <li>
-              <a href="https://zrozumreact.pl">Master React</a>
+              <a href="https://zrozumreact.pl">Zrozumieć React</a>
             </li>
             <li>
               <a href="https://kodilla.com/pl/bootcamp/full-stack"
@@ -121,7 +127,6 @@ import Hero from "../components/Hero.astro";
     margin-top: 1.5rem;
     border-radius: 1.5rem;
     box-shadow: var(--shadow-md);
-    margin-inline: auto;
   }
 
   section {
@@ -164,8 +169,8 @@ import Hero from "../components/Hero.astro";
       grid-template-columns: 1fr 60% 1fr;
     }
 
-    .about > :global(:first-child) {
-      grid-column-start: 2;
+    .about > :global(*) {
+      grid-column: 2;
     }
 
     section {

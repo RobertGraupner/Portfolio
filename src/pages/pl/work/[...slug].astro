@@ -1,12 +1,13 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
-import { getLangFromUrl, useTranslations } from "../../i18n/utils";
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import ContactCTA from "../../components/ContactCTA.astro";
-import Hero from "../../components/Hero.astro";
-import Icon from "../../components/Icon.astro";
-import Pill from "../../components/Pill.astro";
+import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import ContactCTA from "../../../components/ContactCTA.astro";
+import Hero from "../../../components/Hero.astro";
+import Icon from "../../../components/Icon.astro";
+import Pill from "../../../components/Pill.astro";
 
+// Define interface for project data
 interface ProjectData {
   title: string;
   description: string;
@@ -16,23 +17,23 @@ interface ProjectData {
   img_alt?: string;
 }
 
-// Disable prerendering for this page
+// Enable server-side rendering
 export const prerender = false;
 
 // Get language and translation function
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-// Get the slug from the URL parameters
+// Get slug from URL parameters
 const { slug } = Astro.params;
 let Content = null;
 
-// Create a default object that matches the ProjectData interface
+// Create default object matching the interface
 const defaultData: ProjectData = {
-  title: "Project not found",
+  title: "Projekt nie znaleziony",
   description: "",
   publishDate: new Date(),
-  tags: ["none"],
+  tags: ["brak"],
   img: "",
 };
 
@@ -40,19 +41,19 @@ let projectData: ProjectData = defaultData;
 let entry = null;
 
 try {
-  // Dynamically fetch the collection and search for the project with the given slug
-  const work = await getCollection("work");
+  // Get collection and find project with given slug
+  const work = await getCollection("work-pl");
   entry = work.find((entry) => entry.id === slug);
 
   if (entry) {
-    const entryModule = await import(`../../content/work/${entry.id}.md`);
+    const entryModule = await import(`../../../content/work-pl/${entry.id}.md`);
     Content = entryModule.Content;
     projectData = entry.data;
   } else {
-    console.error(`Project not found with slug: ${slug}`);
+    console.error(`Nie znaleziono projektu PL o slug: ${slug}`);
   }
 } catch (error) {
-  console.error(`Error while fetching project ${slug}:`, error);
+  console.error(`Błąd podczas pobierania projektu PL ${slug}:`, error);
 }
 ---
 
@@ -64,7 +65,9 @@ try {
     <div class="stack gap-15">
       <header>
         <div class="wrapper stack gap-2">
-          <a class="back-link" href="/work/"><Icon icon="arrow-left" /> Work</a>
+          <a class="back-link" href="/pl/work/"
+            ><Icon icon="arrow-left" /> Projekty</a
+          >
           <Hero title={projectData.title} align="start">
             <div class="details">
               <div class="tags">
@@ -90,7 +93,7 @@ try {
               Content ? (
                 <Content />
               ) : (
-                <p>Unable to load project content for {entry?.id || ""}.</p>
+                <p>Nie można załadować treści projektu {entry?.id || ""}.</p>
               )
             }
           </div>

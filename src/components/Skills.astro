@@ -1,5 +1,9 @@
 ---
 import Icon from "./Icon.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section class="box skills">
@@ -10,8 +14,8 @@ import Icon from "./Icon.astro";
       size="2.5rem"
       gradient
     />
-    <h2>Development</h2>
-    <p>I write clean, maintainable code and follow best practices.</p>
+    <h2>{t("skills.development.title")}</h2>
+    <p>{t("skills.development.description")}</p>
   </div>
   <div class="stack gap-2 lg:gap-4">
     <Icon
@@ -20,19 +24,13 @@ import Icon from "./Icon.astro";
       size="2.5rem"
       gradient
     />
-    <h2>Communication</h2>
-    <p>
-      I communicate effectively with teams to ensure understanding and
-      alignment.
-    </p>
+    <h2>{t("skills.communication.title")}</h2>
+    <p>{t("skills.communication.description")}</p>
   </div>
   <div class="stack gap-2 lg:gap-4">
     <Icon icon="book" color="var(--accent-regular)" size="2.5rem" gradient />
-    <h2>Learning</h2>
-    <p>
-      I am always looking to improve my skills and stay up to date with the
-      latest technologies.
-    </p>
+    <h2>{t("skills.learning.title")}</h2>
+    <p>{t("skills.learning.description")}</p>
   </div>
 </section>
 

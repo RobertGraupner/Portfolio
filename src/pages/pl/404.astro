@@ -1,0 +1,17 @@
+---
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import Hero from "../../components/Hero.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const lang = getLangFromUrl(Astro.url);
+---
+
+<BaseLayout
+  title="Nie znaleziono | Robert Gräupner"
+  description="Strona 404 - nie znaleziono"
+>
+  <Hero
+    title="Strona nie znaleziona"
+    tagline="Przepraszamy, nie możemy znaleźć strony której szukasz"
+  />
+</BaseLayout>

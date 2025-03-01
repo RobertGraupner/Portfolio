@@ -1,0 +1,102 @@
+---
+import { languages } from "../i18n/translations";
+import Icon from "./Icon.astro";
+
+const currentPath = Astro.url.pathname;
+// Remove language prefix if it exists
+const pathWithoutLang = currentPath.replace(/^\/(en|pl)/, "") || "/";
+
+// Current language
+const currentLang = currentPath.startsWith("/pl") ? "pl" : "en";
+
+// Generate links to language versions
+const targetLang = currentLang === "en" ? "pl" : "en";
+const targetHref =
+  targetLang === "en" ? pathWithoutLang : `/${targetLang}${pathWithoutLang}`;
+---
+
+<language-toggle>
+  <button>
+    <span class="sr-only">Zmień język</span>
+    <span class="icon en">EN</span>
+    <span class="icon pl">PL</span>
+  </button>
+  <a id="language-redirect" href={targetHref}></a>
+</language-toggle>
+
+<style>
+  button {
+    display: flex;
+    border: 0;
+    border-radius: 999rem;
+    padding: 0;
+    background-color: var(--gray-999);
+    box-shadow: inset 0 0 0 1px var(--accent-overlay);
+    cursor: pointer;
+  }
+
+  .icon {
+    z-index: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.8rem;
+    color: var(--accent-overlay);
+  }
+
+  .icon.en::before {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    inset: 0;
+    background-color: var(--accent-regular);
+    border-radius: 999rem;
+  }
+
+  :global(html[lang="pl"]) .icon.en::before {
+    transform: translateX(100%);
+  }
+
+  :global(html[lang="pl"]) .icon.pl,
+  :global(html:not([lang="pl"])) .icon.en {
+    color: var(--accent-text-over);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .icon,
+    .icon.en::before {
+      transition:
+        transform var(--theme-transition),
+        color var(--theme-transition);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .icon.en::before {
+      background-color: SelectedItem;
+    }
+  }
+</style>
+
+<script>
+  class LanguageToggle extends HTMLElement {
+    constructor() {
+      super();
+
+      const button = this.querySelector("button")!;
+      const redirect = this.querySelector(
+        "#language-redirect",
+      ) as HTMLAnchorElement;
+
+      // Handle click on button
+      button.addEventListener("click", () => {
+        redirect.click();
+      });
+    }
+  }
+  customElements.define("language-toggle", LanguageToggle);
+</script>

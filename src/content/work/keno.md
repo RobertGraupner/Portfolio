@@ -5,18 +5,24 @@ img: /assets/Keno.png
 img_alt: Keno B2B platform
 description: Development of a B2B platform for a leading distributor and manufacturer in the RES industry
 tags:
-  - Design
-  - Dev
-  - Branding
+  - JavaScript
+  - Bootstrap
+  - jQuery
+  - PHP
+  - Handlebars
+  - React
+  - API
+  - B2B
 ---
 
-In my daily work, I am involved in the development of a B2B platform for a leading distributor and manufacturer in the RES industry. I joined the project during the development phase, when the platform was published in its basic version. I had the opportunity to participate in the platform's development, implementing new features and shaping its current functionality.
+As a Fronted Developer, I play a key role in developing an innovative B2B platform for a leading distributor and manufacturer in the Renewable Energy Sources (RES) industry. Having joined during the early development phase, I've been instrumental in evolving the platform from its basic version to a comprehensive solution with advanced functionalities.
 
-I was responsible for, among other things:
+My key contributions include:
 
-- Implementation of advanced product configurators enabling comprehensive personalization of RES systems (solar collectors, heat pumps, air conditioners)
-- Design and development of an administrator panel for managing content and product configurations
-- Creation of a marketing notification system with advanced targeting and personalization
-- Development of a system for setting promotions and weekly highlights
-- Creation of various reports for platform activity analysis
-- Implementation of new functionalities based on user needs and optimization of existing solutions in terms of performance and UX
+- Designing and implementing sophisticated product configurators enabling detailed customization of renewable energy systems including solar collectors, heat pumps, and air conditioning units
+- Developing a comprehensive administrator panel with intuitive interfaces for content management and product configuration
+- Creating an advanced marketing notification system with precise targeting capabilities and personalization options
+- Implementing a dynamic promotion management system including weekly featured products
+- Developing an automated warranty extension generation system
+- Building custom analytical reporting tools providing actionable insights on platform usage and performance
+- Continuously enhancing platform functionality based on user feedback while optimizing existing features for improved performance and user experience
