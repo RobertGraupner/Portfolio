@@ -1,7 +1,9 @@
 // @ts-check
 import { defineConfig } from "astro/config";
+import vercel from "@astrojs/vercel";
 
 // https://astro.build/config
 export default defineConfig({
-  output: "server", // Włączamy tryb SSR, aby middleware działało
+  output: "server", // Enable SSR to ensure middleware works
+  adapter: vercel({}), // Add Vercel adapter
 });
