@@ -12,7 +12,7 @@ export const technologies = [
   { name: "Bootstrap", logo: "bootstrap", color: "#7952B3" },
   { name: "Tailwind CSS", logo: "tailwind", color: "#06B6D4" },
   { name: "Redux", logo: "redux", color: "#764ABC" },
-  { name: "Handlebars", logo: "handlebars", color: "#000000" },
+  { name: "AI technologies", logo: "ai", color: "#ffffff" },
   { name: "jQuery", logo: "jQuery", color: "#0769AD" },
   { name: "Vite", logo: "vite", color: "#646CFF" },
   // { name: "Vitest", logo: "vitest", color: "#6E9F18" },
