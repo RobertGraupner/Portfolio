@@ -1,6 +1,6 @@
 ### My Portfolio
 
-Portfolio website created using the Astro and deployed on Vercel. This project showcases my skills, experience, and projects.
+Portfolio website created using the Astro and deployed on Vercel. This project showcases my skills, experience and projects.
 
 ##### Live Version:
 
